@@ -46,6 +46,7 @@ public class Employee {
 	
 		childNames = new LinkedList<>();
 		childIdNumbers = new LinkedList<>();
+		children = new LinkedList<>();
 	}
 	
 	
@@ -54,25 +55,12 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	 public void setMonthlySalary(int grade) {
-		switch (grade) {
-			case 1:
-				monthlySalary = 3000000;
-				break;
-			case 2:
-				monthlySalary = 5000000;
-				break;
-			case 3:
-				monthlySalary = 7000000;
-				break;
-			default:
-				monthlySalary = 0;
-		}
-	
+	public void setMonthlySalary(EmployeeGrade grade) {
+		monthlySalary = grade.getBaseSalary();
 		if (nationality == Nationality.FOREIGNER) {
 			monthlySalary = (int) (monthlySalary * 1.5);
 		}
-	}	
+	}
 	
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
@@ -82,14 +70,15 @@ public class Employee {
 		this.otherMonthlyIncome = income;
 	}
 	
-	public void setSpouse(String spouseName, String spouseIdNumber) {
-		this.spouseName = spouseName;
-		this.spouseIdNumber = spouseIdNumber;
+	private Spouse spouse;
+	private List<Child> children;
+
+	public void setSpouse(Spouse spouse) {
+		this.spouse = spouse;
 	}
-	
-	public void addChild(String childName, String childIdNumber) {
-		childNames.add(childName);
-		childIdNumbers.add(childIdNumber);
+
+	public void addChild(Child child) {
+		children.add(child);
 	}
 	
 	public int getAnnualIncomeTax() {
@@ -104,7 +93,7 @@ public class Employee {
 		}
 		
 		IncomeInfo incomeInfo = new IncomeInfo(monthlySalary, otherMonthlyIncome, annualDeductible);
-		FamilyInfo familyInfo = new FamilyInfo(!spouseIdNumber.equals(""), childIdNumbers.size());
+		FamilyInfo familyInfo = new FamilyInfo(spouse != null, children.size());
 
 		TaxData taxData = new TaxData(incomeInfo, monthWorkingInYear, familyInfo);
 
