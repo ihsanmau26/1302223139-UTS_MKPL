@@ -16,29 +16,39 @@ public class TaxFunction {
 	
 	
 	public static int calculateTax(TaxData data) {
-		
-		int tax = 0;
-		
-		if (data.numberOfMonthWorking > 12) {
-			System.err.println("More than 12 month working per year");
-		}
-		
-		int totalIncome = (data.incomeInfo.monthlySalary + data.incomeInfo.otherMonthlyIncome) * data.numberOfMonthWorking;
-		int nonTaxable = 54000000;
+        if (data.numberOfMonthWorking > 12) {
+            System.err.println("More than 12 month working per year");
+        }
 
-		if (data.familyInfo.isMarried) {
-			nonTaxable += 4500000;
-		}
-		nonTaxable += data.familyInfo.numberOfChildren * 1500000;
+        int totalIncome = calculateTotalIncome(data);
+        int nonTaxable = calculateNonTaxableIncome(data);
+        int taxableIncome = calculateTaxableIncome(totalIncome, data.incomeInfo.annualDeductible, nonTaxable);
+        return calculateTaxAmount(taxableIncome);
+    }
 
-		tax = totalIncome - data.incomeInfo.annualDeductible - nonTaxable;
-		
-		if (tax < 0) {
-			return 0;
-		}else {
-			return tax;
-		}
-			 
-	}
+    private static int calculateTotalIncome(TaxData data) {
+        return (data.incomeInfo.monthlySalary + data.incomeInfo.otherMonthlyIncome) * data.numberOfMonthWorking;
+    }
+
+    private static int calculateNonTaxableIncome(TaxData data) {
+        int nonTaxable = 54000000;
+        if (data.familyInfo.isMarried) {
+            nonTaxable += 4500000;
+        }
+        nonTaxable += data.familyInfo.numberOfChildren * 1500000;
+        return nonTaxable;
+    }
+
+    private static int calculateTaxableIncome(int totalIncome, int deductible, int nonTaxable) {
+        return totalIncome - deductible - nonTaxable;
+    }
+
+    private static int calculateTaxAmount(int taxableIncome) {
+        if (taxableIncome < 0) {
+            return 0;
+        } else {
+            return taxableIncome;
+        }
+    }
 	
 }
