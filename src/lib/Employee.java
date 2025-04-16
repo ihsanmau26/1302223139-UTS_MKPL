@@ -32,19 +32,22 @@ public class Employee {
 	
 	public Employee(EmployeeInfo info) {
 		this.employeeId = info.employeeId;
-		this.firstName = info.firstName;
-		this.lastName = info.lastName;
-		this.idNumber = info.idNumber;
-		this.address = info.address;
-		this.yearJoined = info.yearJoined;
-		this.monthJoined = info.monthJoined;
-		this.dayJoined = info.dayJoined;
+		this.firstName = info.identity.firstName;
+		this.lastName = info.identity.lastName;
+		this.idNumber = info.identity.idNumber;
+		this.address = info.identity.address;
+	
+		this.yearJoined = info.joinDate.year;
+		this.monthJoined = info.joinDate.month;
+		this.dayJoined = info.joinDate.day;
+	
 		this.gender = info.gender;
 		this.nationality = info.nationality;
 	
 		childNames = new LinkedList<>();
 		childIdNumbers = new LinkedList<>();
 	}
+	
 	
 	/**
 	 * Fungsi untuk menentukan gaji bulanan pegawai berdasarkan grade kepegawaiannya (grade 1: 3.000.000 per bulan, grade 2: 5.000.000 per bulan, grade 3: 7.000.000 per bulan)
