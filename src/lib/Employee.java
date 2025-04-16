@@ -1,7 +1,6 @@
 package lib;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,21 +30,20 @@ public class Employee {
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, Nationality nationality, Gender gender) {
-		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.idNumber = idNumber;
-		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
-		this.gender = gender;
-		this.nationality = nationality;
-
-		
-		childNames = new LinkedList<String>();
-		childIdNumbers = new LinkedList<String>();
+	public Employee(EmployeeInfo info) {
+		this.employeeId = info.employeeId;
+		this.firstName = info.firstName;
+		this.lastName = info.lastName;
+		this.idNumber = info.idNumber;
+		this.address = info.address;
+		this.yearJoined = info.yearJoined;
+		this.monthJoined = info.monthJoined;
+		this.dayJoined = info.dayJoined;
+		this.gender = info.gender;
+		this.nationality = info.nationality;
+	
+		childNames = new LinkedList<>();
+		childIdNumbers = new LinkedList<>();
 	}
 	
 	/**
