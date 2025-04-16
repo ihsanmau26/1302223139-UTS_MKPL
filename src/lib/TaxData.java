@@ -1,20 +1,13 @@
 package lib;
 
 public class TaxData {
-    public int monthlySalary;
-    public int otherMonthlyIncome;
     public int numberOfMonthWorking;
-    public int deductible;
-    public boolean isMarried;
-    public int numberOfChildren;
+    public IncomeInfo incomeInfo;
+    public FamilyInfo familyInfo;
 
-    public TaxData(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking,
-                   int deductible, boolean isMarried, int numberOfChildren) {
-        this.monthlySalary = monthlySalary;
-        this.otherMonthlyIncome = otherMonthlyIncome;
+    public TaxData(IncomeInfo incomeInfo, int numberOfMonthWorking, FamilyInfo familyInfo) {
+        this.incomeInfo = incomeInfo;
         this.numberOfMonthWorking = numberOfMonthWorking;
-        this.deductible = deductible;
-        this.isMarried = isMarried;
-        this.numberOfChildren = numberOfChildren;
+        this.familyInfo = familyInfo;
     }
 }

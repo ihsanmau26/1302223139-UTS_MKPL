@@ -102,17 +102,11 @@ public class Employee {
 			monthWorkingInYear = 12;
 		}
 		
-		boolean isMarried = !spouseIdNumber.equals("");
+		IncomeInfo incomeInfo = new IncomeInfo(monthlySalary, otherMonthlyIncome, annualDeductible);
+		FamilyInfo familyInfo = new FamilyInfo(!spouseIdNumber.equals(""), childIdNumbers.size());
 
-		TaxData data = new TaxData(
-			monthlySalary,
-			otherMonthlyIncome,
-			monthWorkingInYear,
-			annualDeductible,
-			isMarried,
-			childIdNumbers.size()
-		);
+		TaxData taxData = new TaxData(incomeInfo, monthWorkingInYear, familyInfo);
 
-		return TaxFunction.calculateTax(data);
+		return TaxFunction.calculateTax(taxData);
 	}
 }
