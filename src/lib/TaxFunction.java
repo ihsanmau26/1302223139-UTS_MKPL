@@ -23,15 +23,15 @@ public class TaxFunction {
 			System.err.println("More than 12 month working per year");
 		}
 		
-		if (data.numberOfChildren > 3) {
-			data.numberOfChildren = 3;
+		int totalIncome = (data.incomeInfo.monthlySalary + data.incomeInfo.otherMonthlyIncome) * data.numberOfMonthWorking;
+		int nonTaxable = 54000000;
+
+		if (data.familyInfo.isMarried) {
+			nonTaxable += 4500000;
 		}
-		
-		if (data.isMarried) {
-			tax = (int) Math.round(0.05 * (((data.monthlySalary + data.otherMonthlyIncome) * data.numberOfMonthWorking) - data.deductible - (54000000 + 4500000 + (data.numberOfChildren * 1500000))));
-		}else {
-			tax = (int) Math.round(0.05 * (((data.monthlySalary + data.otherMonthlyIncome) * data.numberOfMonthWorking) - data.deductible - 54000000));
-		}
+		nonTaxable += data.familyInfo.numberOfChildren * 1500000;
+
+		tax = totalIncome - data.incomeInfo.annualDeductible - nonTaxable;
 		
 		if (tax < 0) {
 			return 0;
