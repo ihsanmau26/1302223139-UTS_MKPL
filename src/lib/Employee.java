@@ -102,6 +102,17 @@ public class Employee {
 			monthWorkingInYear = 12;
 		}
 		
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+		boolean isMarried = !spouseIdNumber.equals("");
+
+		TaxData data = new TaxData(
+			monthlySalary,
+			otherMonthlyIncome,
+			monthWorkingInYear,
+			annualDeductible,
+			isMarried,
+			childIdNumbers.size()
+		);
+
+		return TaxFunction.calculateTax(data);
 	}
 }
